@@ -1,0 +1,4 @@
+[submodule "src/ethos-u-vela"]
+	path = src/ethos-u-vela
+	url = https://gitlab.arm.com/artificial-intelligence/ethos-u/ethos-u-vela.git
+	ignore = untracked
