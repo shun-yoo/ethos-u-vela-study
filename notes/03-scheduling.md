@@ -53,7 +53,6 @@ SRAM 크기에 비례해서 조각 크기를 구하는 공식은 없다. 대신 
 
 **보장되는 것과 보장되지 않는 것**
 
-- **보장되는 것:** 결과가 SRAM 한도 안에 들어간다. 할당 단계에서 한도를 넘으면 `Failed to allocate tensors` 에러를 낸다.
 - **보장되지 않는 것:** 선택한 스케줄이 가장 빠르다는 것.
   - 판단에 쓰이는 사이클은 Vela의 비용 모델(`architecture/ethosu55/ethos_u55_performance.cpp` 등)이 계산한 추정치다.
 
