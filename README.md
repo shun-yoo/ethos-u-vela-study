@@ -1,5 +1,7 @@
 # Ethos-U Vela Study
 
+Hyungsun Yoo ([@shun-yoo](https://github.com/shun-yoo))
+
 **NPU backend compiler study** — how Arm's Vela compiler turns a quantized neural network into commands for the Ethos-U55 NPU.
 
 - Trace Vela's compilation pipeline (C++ core, Regor): graph optimisation → scheduling → memory allocation → command stream generation.
