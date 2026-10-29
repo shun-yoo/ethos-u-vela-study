@@ -40,15 +40,24 @@
 
 - Arm GCC는 크로스 컴파일러다. x86에서 돌지만 Arm용 기계어를 만든다.
 
-**흐름: 컴파일은 서버에서, 실행만 FVP에서**
+**전체 흐름**
 
-```
-모델.tflite ─Vela─▶ 모델_vela.tflite ─┐
-C/C++ 소스 (TFLite Micro, NPU 드라이버, 앱) ─┴─Arm GCC─▶ 앱.axf ─▶ FVP에서 실행
-```
+| 순서 | 하는 일 | 도구 | 컴파일러로 치면 | 결과 |
+|---|---|---|---|---|
+| 1 | 모델 정의, 학습 | PyTorch / TensorFlow | 소스 프로그램 | 학습된 모델 (float32) |
+| 2 | 그래프 파일로 변환, 그래프 정리, int8 양자화 | TFLite 변환기 | 프론트엔드 + 미들엔드 일부 | `모델.tflite` |
+| 3 | NPU에 맞게 연산 변환, 스케줄링, SRAM 할당, NPU 명령 생성 | Vela | 미들엔드(하드웨어 맞춤) + 백엔드 | `모델_vela.tflite` |
+| 4 | Eval Kit(CPU 프로그램 소스)과 `모델_vela.tflite`를 함께 빌드 | Arm GCC | CPU용 컴파일 | `.axf` |
+| 5 | `.axf` 실행. Eval Kit 프로그램이 입력을 메모리에 올리고, NPU에 명령 목록 실행을 지시하고, 결과와 NPU 사이클을 출력 | FVP | — | 추론 결과, NPU 사이클 |
 
+- 1~4는 서버에서, 5는 FVP에서 실행된다. 컴파일은 3과 4에서 끝나고, 5에서는 실행만 한다.
+- `모델_vela.tflite`는 NPU 명령이 담긴 파일이라 혼자 실행되지 않는다. CPU에서 NPU를 구동하는 프로그램이 필요하고, Eval Kit(Arm ML Embedded Evaluation Kit)이 그 프로그램의 소스 코드다.
+  - 앱: 입력 준비, 추론 호출, 결과 출력
+  - TFLite Micro: 모델의 연산을 순서대로 실행한다. NPU용 연산은 드라이버로 넘긴다.
+  - NPU 드라이버: 명령 목록을 Ethos-U55에 넘기고 완료를 기다린다.
+  - 플랫폼 코드: 보드 초기화, 타이머, UART 등
 - 모델은 `.axf` 안에 데이터로 들어간다. FVP에는 `.axf` 하나만 넣는다.
-- 실행 중에는 CPU가 TFLite Micro로 모델을 돌리다가, NPU용 연산을 만나면 드라이버를 통해 명령 목록을 NPU에 넘긴다.
+- `inference_runner` 앱은 입력을 무작위 값으로 채우고, 추론을 1번 실행하고, NPU 사이클(`NPU ACTIVE` 등)을 출력한다. 모델 파일은 cmake 옵션 `inference_runner_MODEL_PATH`로 지정한다.
 
 **FVP = 가상 보드**
 
