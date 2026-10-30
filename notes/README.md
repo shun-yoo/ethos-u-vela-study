@@ -9,3 +9,5 @@ Ethos-U55 NPU와 Vela 컴파일러를 공부하며 정리한 노트. 00~02는 �
 | [02-eval-kit-runtime.md](02-eval-kit-runtime.md) | Eval Kit의 역할, 런타임 스택, 실행 순서, 메모리 배치 |
 | [03-vela-pipeline.md](03-vela-pipeline.md) | Vela와 C++ 엔진 Regor의 구조, 소스 위치, 처리 순서 |
 | [04-scheduling.md](04-scheduling.md) | 스케줄러가 조각 크기·cascade·버퍼링을 정하는 방식 |
+
+핵심 인사이트 모음: [insights.md](insights.md)

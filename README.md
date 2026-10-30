@@ -12,6 +12,7 @@ Notes are written in Korean.
 
 - [SETUP.md](SETUP.md) — toolchain versions and environment setup
 - [notes/](notes/)
+  - [Insights](notes/insights.md)
   - [00 Compiler and model basics](notes/00-compiler-and-model-basics.md)
   - [01 Ethos-U55 NPU, Arm GCC, FVP](notes/01-ethos-u55-and-fvp.md)
   - [02 Eval Kit runtime](notes/02-eval-kit-runtime.md)
