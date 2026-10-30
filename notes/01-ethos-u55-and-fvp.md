@@ -52,10 +52,7 @@
 
 - 1~4는 서버에서, 5는 FVP에서 실행된다. 컴파일은 3과 4에서 끝나고, 5에서는 실행만 한다.
 - `모델_vela.tflite`는 NPU 명령이 담긴 파일이라 혼자 실행되지 않는다. CPU에서 NPU를 구동하는 프로그램이 필요하고, Eval Kit(Arm ML Embedded Evaluation Kit)이 그 프로그램의 소스 코드다.
-  - 앱: 입력 준비, 추론 호출, 결과 출력
-  - TFLite Micro: 모델의 연산을 순서대로 실행한다. NPU용 연산은 드라이버로 넘긴다.
-  - NPU 드라이버: 명령 목록을 Ethos-U55에 넘기고 완료를 기다린다.
-  - 플랫폼 코드: 보드 초기화, 타이머, UART 등
+  - 구성과 실행 과정은 [02-eval-kit-runtime.md](02-eval-kit-runtime.md)에 있다.
 - 모델은 `.axf` 안에 데이터로 들어간다. FVP에는 `.axf` 하나만 넣는다.
 - `inference_runner` 앱은 입력을 무작위 값으로 채우고, 추론을 1번 실행하고, NPU 사이클(`NPU ACTIVE` 등)을 출력한다. 모델 파일은 cmake 옵션 `inference_runner_MODEL_PATH`로 지정한다.
 

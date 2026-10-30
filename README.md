@@ -14,5 +14,6 @@ Notes are written in Korean.
 - [notes/](notes/)
   - [00 Compiler and model basics](notes/00-compiler-and-model-basics.md)
   - [01 Ethos-U55 NPU, Arm GCC, FVP](notes/01-ethos-u55-and-fvp.md)
-  - [02 Vela structure and pipeline](notes/02-vela-pipeline.md)
-  - [03 Scheduling](notes/03-scheduling.md)
+  - [02 Eval Kit runtime](notes/02-eval-kit-runtime.md)
+  - [03 Vela structure and pipeline](notes/03-vela-pipeline.md)
+  - [04 Scheduling](notes/04-scheduling.md)

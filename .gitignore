@@ -1,6 +1,7 @@
-# Python 환경, 받은 도구(Arm GCC, FVP, Eval Kit), 모델과 Vela 출력은 다시 만들 수 있다 (SETUP.md 참고)
+# Python 환경, 받은 도구(Arm GCC, FVP, Eval Kit), 모델과 Vela 출력, 빌드 결과는 다시 만들 수 있다 (SETUP.md 참고)
 .venv/
 tools/
 models/
+build/
 *.log
 __pycache__/
